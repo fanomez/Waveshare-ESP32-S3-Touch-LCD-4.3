@@ -6,17 +6,14 @@
 #include "../ui.h"
 
 lv_obj_t * ui_Screen1 = NULL;
+lv_obj_t * ui_TabView1 = NULL;
+lv_obj_t * ui_TabPage1 = NULL;
+lv_obj_t * ui_LabelAdresseMAC = NULL;
+lv_obj_t * ui_LabelAdresseIP = NULL;
 lv_obj_t * ui_Button1 = NULL;
-lv_obj_t * ui_Label3 = NULL;
+lv_obj_t * ui_LabelButton = NULL;
+lv_obj_t * ui_TabPage2 = NULL;
 // event funtions
-void ui_event_Button1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_Screen2, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_Screen2_screen_init);
-    }
-}
 
 // build funtions
 
@@ -24,31 +21,42 @@ void ui_Screen1_screen_init(void)
 {
     ui_Screen1 = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Screen1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Screen1, lv_color_hex(0x0C2480), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Screen1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_grad_color(ui_Screen1, lv_color_hex(0x7C7B7B), LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Button1 = lv_btn_create(ui_Screen1);
+    ui_TabView1 = lv_tabview_create(ui_Screen1, LV_DIR_TOP, 50);
+    lv_obj_set_width(ui_TabView1, 800);
+    lv_obj_set_height(ui_TabView1, 480);
+    lv_obj_set_x(ui_TabView1, 1);
+    lv_obj_set_y(ui_TabView1, -2);
+    lv_obj_clear_flag(ui_TabView1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_TabPage1 = lv_tabview_add_tab(ui_TabView1, "WiFi");
+
+    ui_LabelAdresseMAC = lv_label_create(ui_TabPage1);
+    lv_obj_set_width(ui_LabelAdresseMAC, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LabelAdresseMAC, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LabelAdresseMAC, 0);
+    lv_obj_set_y(ui_LabelAdresseMAC, 30);
+    lv_label_set_text(ui_LabelAdresseMAC, "Adresse MAC :");
+
+    ui_LabelAdresseIP = lv_label_create(ui_TabPage1);
+    lv_obj_set_width(ui_LabelAdresseIP, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LabelAdresseIP, LV_SIZE_CONTENT);    /// 1
+    lv_label_set_text(ui_LabelAdresseIP, "Adresse IP : ");
+
+    ui_Button1 = lv_btn_create(ui_TabPage1);
     lv_obj_set_width(ui_Button1, 100);
     lv_obj_set_height(ui_Button1, 50);
-    lv_obj_set_x(ui_Button1, 304);
-    lv_obj_set_y(ui_Button1, 180);
-    lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_Button1, LV_ALIGN_BOTTOM_MID);
     lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_radius(ui_Button1, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_Button1, lv_color_hex(0x818181), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Button1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label3 = lv_label_create(ui_Screen1);
-    lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label3, 302);
-    lv_obj_set_y(ui_Label3, 180);
-    lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label3, "Next");
+    ui_LabelButton = lv_label_create(ui_Button1);
+    lv_obj_set_width(ui_LabelButton, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LabelButton, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_LabelButton, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LabelButton, "Connect");
 
-    lv_obj_add_event_cb(ui_Button1, ui_event_Button1, LV_EVENT_ALL, NULL);
+    ui_TabPage2 = lv_tabview_add_tab(ui_TabView1, "Bluetooth");
 
 }
 
@@ -58,7 +66,12 @@ void ui_Screen1_screen_destroy(void)
 
     // NULL screen variables
     ui_Screen1 = NULL;
+    ui_TabView1 = NULL;
+    ui_TabPage1 = NULL;
+    ui_LabelAdresseMAC = NULL;
+    ui_LabelAdresseIP = NULL;
     ui_Button1 = NULL;
-    ui_Label3 = NULL;
+    ui_LabelButton = NULL;
+    ui_TabPage2 = NULL;
 
 }
