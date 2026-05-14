@@ -18,6 +18,7 @@ extern lv_obj_t * ui_TabView1;
 extern lv_obj_t * ui_TabPage1;
 extern lv_obj_t * ui_LabelAdresseMAC;
 extern lv_obj_t * ui_LabelAdresseIP;
+extern void ui_event_Button1(lv_event_t * e);
 extern lv_obj_t * ui_Button1;
 extern lv_obj_t * ui_LabelButton;
 extern lv_obj_t * ui_TabPage2;

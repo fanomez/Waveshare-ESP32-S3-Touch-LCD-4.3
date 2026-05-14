@@ -32,6 +32,9 @@
 #include <ESP_Panel_Library.h>
 #include <ESP_IOExpander_Library.h>
 #include <ui.h>
+#include "variables_globales.h"      // Permet l'accès aux variables globales
+#include "TaskComWifi.h"
+
 
 // Extend IO Pin define
 #define TP_RST 1
@@ -224,6 +227,19 @@ void setup()
     lvgl_port_unlock();
 
     Serial.println("Setup done");
+
+    	if(TaskWifiHandler==NULL){
+	// Your code here
+	    xTaskCreatePinnedToCore(
+        TaskComWifi, /* Function to implement the task */
+        "Task Wifi", /* Name of the task */
+            5000,  /* Stack size in words */
+            NULL,  /* Task input parameter */
+            3,  /* Priority of the task */
+            &TaskWifiHandler,  /* Task handle. */
+            1); /* Core where the task should run */ 
+	}
+
 }
 
 void loop()

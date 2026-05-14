@@ -14,6 +14,14 @@ lv_obj_t * ui_Button1 = NULL;
 lv_obj_t * ui_LabelButton = NULL;
 lv_obj_t * ui_TabPage2 = NULL;
 // event funtions
+void ui_event_Button1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_CLICKED) {
+        wifi(e);
+    }
+}
 
 // build funtions
 
@@ -57,6 +65,8 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_LabelButton, "Connect");
 
     ui_TabPage2 = lv_tabview_add_tab(ui_TabView1, "Bluetooth");
+
+    lv_obj_add_event_cb(ui_Button1, ui_event_Button1, LV_EVENT_ALL, NULL);
 
 }
 

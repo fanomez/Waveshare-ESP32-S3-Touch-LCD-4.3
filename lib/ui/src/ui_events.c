@@ -3,17 +3,12 @@
 // LVGL version: 8.3.11
 // Project name: SquareLine_Project
 
-#ifndef _UI_EVENTS_H
-#define _UI_EVENTS_H
+#include "ui.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-void wifi(lv_event_t * e);
+void wifi(lv_event_t * e)
+{
 
-#ifdef __cplusplus
-} /*extern "C"*/
-#endif
 
-#endif
+	
+}
